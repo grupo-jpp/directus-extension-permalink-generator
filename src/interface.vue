@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import slugify from '@sindresorhus/slugify';
 import { render } from 'micromustache';
-import { computed, inject, ref, watch } from 'vue';
+import { computed, inject, ref, watch, type Ref } from 'vue';
+
+interface DirectusApi {
+	get(url: string, config?: { params?: Record<string, unknown> }): Promise<{ data: { data: Record<string, unknown> } }>;
+}
 
 // ─── Props ──────────────────────────────────────────────────────────────────
 
@@ -41,8 +45,8 @@ const emit = defineEmits<{
 
 // ─── Injected Directus context ───────────────────────────────────────────────
 
-const api = inject<any>('api');
-const values = inject<any>('values');
+const api = inject<DirectusApi>('api');
+const values = inject<Ref<Record<string, unknown>>>('values');
 
 // ─── State ───────────────────────────────────────────────────────────────────
 
@@ -108,6 +112,7 @@ async function buildPath(
 	if (!parentField) return [];
 
 	try {
+		if (!api) return [];
 		const response = await api.get(`/items/${props.collection}/${pageId}`, {
 			params: { fields: ['id', parentField].join(',') },
 		});
@@ -119,7 +124,7 @@ async function buildPath(
 		// back to rendering the template with the remote item's data.
 		const remoteSlug = transform(renderTemplate(props.template ?? '', page));
 
-		const parentId = page[parentField];
+		const parentId = page[parentField] as string | number | undefined;
 		if (parentId && parentId !== pageId) {
 			const parentPath = await buildPath(parentId, visitedIds, depth + 1);
 			return [...parentPath, remoteSlug];
@@ -139,7 +144,7 @@ async function buildFullPath(): Promise<string> {
 	}
 
 	const currentValues = values?.value ?? {};
-	const parentId = currentValues[parentField];
+	const parentId = currentValues[parentField] as string | number | undefined;
 
 	// Self-reference guard
 	if (parentId && parentId === props.primaryKey) {
