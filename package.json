@@ -1,0 +1,41 @@
+{
+  "name": "@grupo-jpp/directus-extension-permalink-generator",
+  "version": "1.0.0",
+  "description": "Hierarchical permalink generator for Directus — auto-generates slugs with parent chain resolution, accent-safe slugify, inline editing, and live preview",
+  "keywords": [
+    "directus",
+    "directus-extension",
+    "directus-custom-interface",
+    "directus-extension-interface",
+    "permalink",
+    "slug",
+    "url-generator",
+    "seo",
+    "cms",
+    "hierarchical"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "directus:extension": {
+    "type": "interface",
+    "path": "dist/index.js",
+    "source": "src/index.ts",
+    "host": "^11.0.0"
+  },
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify --sourcemap inline"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "@directus/extensions-sdk": "^11.0.0",
+    "@directus/types": "^11.2.1",
+    "@sindresorhus/slugify": "^2.2.1",
+    "micromustache": "^8.0.3",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.22"
+  }
+}
