@@ -1,0 +1,1 @@
+# directus-extension-permalink-generator
