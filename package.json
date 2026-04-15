@@ -1,6 +1,6 @@
 {
   "name": "directus-extension-slug-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Your Name <edersign@gmail.com>",
   "description": "Hierarchical slug generator for Directus — auto-generates slugs with parent chain resolution, accent-safe slugify, inline editing, and live preview",
   "repository": {
