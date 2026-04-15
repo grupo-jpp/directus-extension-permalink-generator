@@ -1,7 +1,12 @@
 {
   "name": "directus-extension-permalink-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": "Your Name <edersign@gmail.com>",
   "description": "Hierarchical permalink generator for Directus — auto-generates slugs with parent chain resolution, accent-safe slugify, inline editing, and live preview",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/grupo-jpp/directus-extension-permalink-generator.git"
+	},
   "keywords": [
     "directus",
     "directus-extension",
@@ -39,8 +44,5 @@
     "micromustache": "^8.0.3",
     "typescript": "^6.0.2",
     "vue": "^3.5.32"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
